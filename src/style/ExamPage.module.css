@@ -1,0 +1,164 @@
+/* ExamPage.module.css */
+
+.sectionPadding {
+    padding: 60px 0;
+  }
+  
+  .bgCover {
+    background-image: url('../assets/images/all-img/section-bg-1.png');
+    background-size: cover;
+  }
+  
+  .bgNoRepeat {
+    background-repeat: no-repeat;
+  }
+  
+  .bgCenter {
+    background-position: center;
+  }
+  
+  .minHScreen {
+    min-height: 100vh;
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  .itemsCenter {
+    align-items: center;
+  }
+  
+  .justifyCenter {
+    justify-content: center;
+  }
+  
+  .container {
+    max-width: 800px;
+    width: 100%;
+  }
+  
+  .bgWhite {
+    background-color: white;
+  }
+  
+  .shadowBox5 {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .rounded {
+    border-radius: 8px;
+  }
+  
+  .p8 {
+    padding: 32px;
+  }
+  
+  .text3xl {
+    font-size: 1.875rem;
+  }
+  
+  .fontBold {
+    font-weight: 700;
+  }
+  
+  .textCenter {
+    text-align: center;
+  }
+  
+  .loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+  }
+  
+  .spinner {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .btnPrimary {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .btnPrimary:hover {
+    background-color: #0056b3;
+  }
+  
+  .btnSecondary {
+    background-color: #6c757d;
+    color: white;
+  }
+  
+  .btnSecondary:hover {
+    background-color: #5a6268;
+  }
+  
+  .mt4 {
+    margin-top: 16px;
+  }
+  
+  .question {
+    margin-bottom: 24px;
+  }
+  
+  .questionText {
+    margin-bottom: 8px;
+  }
+  
+  .options {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .option {
+    margin-bottom: 8px;
+  }
+  
+  .fillBlank {
+    margin: 0 8px;
+    padding: 4px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .entryTextarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .results {
+    margin-top: 24px;
+  }
+  
+  .correct {
+    color: green;
+  }
+  
+  .incorrect {
+    color: red;
+  }
+  
+  .correctAnswer {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .explanation {
+    margin-top: 8px;
+    color: #333;
+  }
+  

@@ -1,0 +1,190 @@
+/* CourseContentPage.module.css */
+
+.sectionPadding {
+    padding: 60px 0;
+  }
+  
+  .bgCover {
+    background-image: url('../assets/images/all-img/section-bg-1.png');
+    background-size: cover;
+  }
+  
+  .bgNoRepeat {
+    background-repeat: no-repeat;
+  }
+  
+  .bgCenter {
+    background-position: center;
+  }
+  
+  .minHScreen {
+    min-height: 100vh;
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  .toc {
+    flex: 1;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+  }
+  
+  .chapterTitle {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .chapterList {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .chapterItem {
+    margin-bottom: 8px;
+    cursor: pointer;
+    color: #007bff;
+    text-decoration: underline;
+  }
+  
+  .chapterItem:hover {
+    color: #0056b3;
+  }
+  
+  .courseContentPage {
+    flex: 3;
+    padding: 20px;
+  }
+  
+  .bgWhite {
+    background-color: white;
+  }
+  
+  .shadowBox5 {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .rounded {
+    border-radius: 8px;
+  }
+  
+  .p8 {
+    padding: 32px;
+  }
+  
+  .header {
+    margin-bottom: 24px;
+  }
+  
+  .text3xl {
+    font-size: 1.875rem;
+  }
+  
+  .fontBold {
+    font-weight: 700;
+  }
+  
+  .textCenter {
+    text-align: center;
+  }
+  
+  .courseContent {
+    margin-bottom: 24px;
+  }
+  
+  .currentChapterTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+  }
+  
+  .currentSubchapterTitle {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .detailedContent {
+    margin-bottom: 24px;
+  }
+  
+  .loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+  }
+  
+  .spinner {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .btnPrimary {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .btnPrimary:hover {
+    background-color: #0056b3;
+  }
+  
+  .btnSecondary {
+    background-color: #6c757d;
+    color: white;
+  }
+  
+  .btnSecondary:hover {
+    background-color: #5a6268;
+  }
+  
+  .mt4 {
+    margin-top: 16px;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .paginationBtn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .paginationBtn:hover {
+    background-color: #0056b3;
+  }
+  
+  .paginationBtn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+  }
+  
+  .pageInfo {
+    font-size: 1rem;
+  }
+  
