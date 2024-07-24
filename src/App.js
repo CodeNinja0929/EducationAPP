@@ -1,7 +1,7 @@
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import PrivateRoute from "./context/PrivateRoute";
-
 import HomeTwo from "./Components/Home/HomeTwo";
 import AboutOne from "./Components/Pages/AboutOne";
 import BLogStandard from "./Components/Pages/BLogStandard";
@@ -18,6 +18,17 @@ import ExamPage from "./Components/Courses/ExamPage";
 import GenerateVideoCourse from "./Components/Courses/GenerateVideoCourse";
 
 function App() {
+  const [prompt, setPrompt] = useState("");
+  const [chapters, setChapters] = useState(null);
+  const [content, setContent] = useState({});
+  const [examDetails, setExamDetails] = useState(null);
+  const [userId, setUserId] = useState("");
+  const [courseDetail, setCourseDetail] = useState({});
+
+  useEffect(() => {
+    console.log("App component rendered");
+  }, []);
+
   return (
     <AuthProvider>
       <BrowserRouter>
@@ -30,11 +41,11 @@ function App() {
             <Route path="/schoolai/" element={<HomeTwo />} />
             <Route path="/schoolai/about" element={<AboutOne />} />
             <Route path="/schoolai/courses" element={<PrivateRoute element={<Courses />} />} />
-            <Route path="/schoolai/new-course" element={<PrivateRoute element={<AITeacherInputPage />} />} />
-            <Route path="/schoolai/courseoutline" element={<PrivateRoute element={<CourseOutlinePage />} />} />
-            <Route path="/schoolai/finalview" element={<PrivateRoute element={<FinalViewPage />} />} />
-            <Route path="/schoolai/coursecontent" element={<PrivateRoute element={<CourseContentPage />} />} />
-            <Route path="/schoolai/exam" element={<PrivateRoute element={<ExamPage />} />} />
+            <Route path="/schoolai/new-course" element={<PrivateRoute element={<AITeacherInputPage setPrompt={setPrompt} userId={userId} />} />} />
+            <Route path="/schoolai/courseoutline" element={<PrivateRoute element={<CourseOutlinePage prompt={prompt} setChapters={setChapters} />} />} />
+            <Route path="/schoolai/finalview" element={<PrivateRoute element={<FinalViewPage prompt={prompt} chapters={chapters} content={content} setContent={setContent} />} />} />
+            <Route path="/schoolai/coursecontent" element={<PrivateRoute element={<CourseContentPage prompt={prompt} chapters={chapters} content={content} />} />} />
+            <Route path="/schoolai/exam" element={<PrivateRoute element={<ExamPage {...examDetails} prompt={prompt} />} />} />
             <Route path="/schoolai/generatevideo" element={<PrivateRoute element={<GenerateVideoCourse />} />} />
             <Route path="/schoolai/blog-standard" element={<BLogStandard />} />
             <Route path="/schoolai/contacts" element={<ContactUs />} />

@@ -22,17 +22,17 @@ const PageBanner = ({ pageName, pageTitle, num, title }) => {
             </li>
           </ol>
         </nav>
-        <div className="mt-10 space-x-4" style={{marginBottom: "-100px"}}>
+        {/* <div className="mt-10 space-x-4" style={{marginBottom: "-100px"}}>
           <Link to="/schoolai/new-course" className="btn btn-primary">
             New Course Generation
           </Link>
           <Link
-            to="/schoolai/generate-video"
+            to="/schoolai/generatevideo"
             className={styles['btn-outline-red']} // Use the CSS module class
           >
             Generate Video Course
           </Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );

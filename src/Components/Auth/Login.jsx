@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth, signInWithEmailAndPassword } from "../../config/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../config/firebase";
 import background from "../../assets/images/all-img/section-bg-5.png";
 
 const LoginPage = () => {
@@ -10,6 +11,7 @@ const LoginPage = () => {
     password: "",
   });
   const [formErrors, setFormErrors] = useState({});
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -30,13 +32,17 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      try {
-        await signInWithEmailAndPassword(auth, formData.email, formData.password);
-        navigate("/schoolai/courses");
-      } catch (error) {
-        setFormErrors({ submit: error.message });
-      }
+    if (!validateForm()) return;
+
+    setLoading(true);
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, formData.email, formData.password);
+      setLoading(false);
+      navigate("/schoolai/courses");
+    } catch (error) {
+      console.error("Error during login:", error);
+      setFormErrors({ submit: error.message });
+      setLoading(false);
     }
   };
 
@@ -85,16 +91,15 @@ const LoginPage = () => {
                 className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
               />
               {formErrors.password && (
-                <p className="text-red-500 text-sm mt-1">
-                  {formErrors.password}
-                </p>
+                <p className="text-red-500 text-sm mt-1">{formErrors.password}</p>
               )}
             </div>
             <button
               type="submit"
               className="w-full py-3 bg-primary text-white rounded-md hover:bg-primary-dark transition duration-300"
+              disabled={loading}
             >
-              Login
+              {loading ? <div className="spinner"></div> : "Login"}
             </button>
             {formErrors.submit && (
               <p className="text-red-500 text-sm mt-1">{formErrors.submit}</p>

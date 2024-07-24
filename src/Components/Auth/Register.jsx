@@ -1,7 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth, createUserWithEmailAndPassword } from "../../config/firebase";
+import { auth, db } from "../../config/firebase";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 import background from "../../assets/images/all-img/section-bg-5.png";
 
 const RegisterPage = () => {
@@ -12,6 +14,7 @@ const RegisterPage = () => {
     confirmPassword: "",
   });
   const [formErrors, setFormErrors] = useState({});
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -35,13 +38,29 @@ const RegisterPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      try {
-        await createUserWithEmailAndPassword(auth, formData.email, formData.password);
-        navigate("/login");
-      } catch (error) {
-        setFormErrors({ submit: error.message });
-      }
+    if (!validateForm()) return;
+
+    setLoading(true);
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        formData.email,
+        formData.password
+      );
+      const user = userCredential.user;
+      await updateProfile(user, { displayName: formData.username });
+
+      await setDoc(doc(db, "users", user.uid), {
+        email: formData.email,
+        username: formData.username,
+      });
+
+      setLoading(false);
+      navigate("/schoolai/login");
+    } catch (error) {
+      console.error("Error during registration:", error);
+      setFormErrors({ submit: error.message });
+      setLoading(false);
     }
   };
 
@@ -77,9 +96,7 @@ const RegisterPage = () => {
                 className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
               />
               {formErrors.username && (
-                <p className="text-red-500 text-sm mt-1">
-                  {formErrors.username}
-                </p>
+                <p className="text-red-500 text-sm mt-1">{formErrors.username}</p>
               )}
             </div>
             <div className="mb-4">
@@ -105,9 +122,7 @@ const RegisterPage = () => {
                 className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
               />
               {formErrors.password && (
-                <p className="text-red-500 text-sm mt-1">
-                  {formErrors.password}
-                </p>
+                <p className="text-red-500 text-sm mt-1">{formErrors.password}</p>
               )}
             </div>
             <div className="mb-4">
@@ -120,16 +135,15 @@ const RegisterPage = () => {
                 className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
               />
               {formErrors.confirmPassword && (
-                <p className="text-red-500 text-sm mt-1">
-                  {formErrors.confirmPassword}
-                </p>
+                <p className="text-red-500 text-sm mt-1">{formErrors.confirmPassword}</p>
               )}
             </div>
             <button
               type="submit"
               className="w-full py-3 bg-primary text-white rounded-md hover:bg-primary-dark transition duration-300"
+              disabled={loading}
             >
-              Register
+              {loading ? <div className="spinner"></div> : "Register"}
             </button>
             {formErrors.submit && (
               <p className="text-red-500 text-sm mt-1">{formErrors.submit}</p>
